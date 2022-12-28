@@ -1,2 +1,33 @@
+use fm-test
 
-use('fm-test');
+db.items.updateOne({item: "planner"}, {$set: {qty: 77}})
+
+
+db.items.updateMany({status: 'A'}, {$set: {status: "done"}})
+
+db.items.updateMany({status: 'done'}, {
+  $set: {
+    "size.h": 15
+    }
+})
+
+db.items.updateMany({status: 'C'}, {$set: {status: "error"}})
+
+db.items.deleteMany({item: "planner"})
+
+db.items.updateMany({status: 'D'}, {$set: {status: "processing"}})
+
+/*   Видалити всі айтеми, або статус error, або
+статус done і при цьому кількість (qty)>= 50   */
+
+
+db.items.deleteMany({
+  $or: [{
+    status: "error"
+  }, {
+    status: "done",
+    qty: {
+      $gte: 50
+    }
+  }]
+})
