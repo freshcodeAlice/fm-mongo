@@ -132,3 +132,45 @@ db.createCollection("users", {
 
 
 */
+
+
+db.createCollection('auto', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object', 
+            required: ['brand', 'model', 'enginge'],
+            properties: {
+                brand: {
+                    bsonType: 'string'
+                },
+                model: {
+                    bsonType: 'string'
+                },
+                engine: {
+                    bsonType: 'object',
+                    required: ['volume', 'fuelType'],
+                    properties: {
+                        volume: {
+                            bsonType: 'string'
+                        },
+                        fuelType: {
+                            bsonType: 'string'
+                        }
+                    }
+                },
+                capacity: {
+                    bsonType: 'int'
+                },
+                weight: {
+                    bsonType: 'double'
+                },
+                length: {
+                    bsonType: 'double'
+                },
+                vip: {
+                    bsonType: 'bool'
+                }
+            }
+        }
+    }
+})
