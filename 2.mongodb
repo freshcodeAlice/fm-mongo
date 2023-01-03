@@ -128,5 +128,33 @@ db.products.aggregate([
          * To exclude multiple fields, pass the field names in an array.
          */
         $unset: 'manufacturerId'
+    }, {
+        /**
+         * _id: The id of the group.
+         */
+        $group: {
+          _id: "$manufacturer.name",
+          countPosition: {
+           $count: {}
+           ///$sum: 1 - alternative
+          }
+        }
     }
 ]);
+
+
+db.products.find({}).skip(2).limit(5);
+
+
+/*
+
+Практика:
+Створити колекцію студентів і колекцію груп. 
+Студент має ім'я, посилання на групу.
+Група містить ім'я, ім'я викладача.
+
+Заінсертити по 3-4 людини в кожну групу (груп хоча би 2).
+1. Вивести студентів з інформацією про групу.
+2. Порахувати кількість студентів в кожній групі. 
+
+*/
